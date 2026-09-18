@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İyi ki Doğdun Hayatımın Anlamı ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Modern Yazı Tipleri -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Yükleme Ekranı -->
+    <div id="loader">
+        <div class="heart-pulse">❤️</div>
+        <p>Sürpriz Yükleniyor...</p>
+    </div>
+
+    <!-- Müzik Kontrolü -->
+    <audio id="bg-music" loop>
+        <source src="music/sarkim.mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-btn" class="music-btn">
+        <span id="music-icon">🎵</span> Müzik
+    </button>
+
+    <!-- Oyun UI: Sihirli Kalp Toplama -->
+    <div id="game-ui" class="game-ui">
+        <span>Dilek Pastası Kilitli 🔒 Sihirli Kalpleri Bul: </span>
+        <span id="magic-heart-count" class="badge">0 / 3</span>
+    </div>
+
+    <!-- Tek, Optimize Edilmiş Arka Plan Canvas'ı -->
+    <canvas id="mainCanvas"></canvas>
+    
+    <!-- Sayfa İçeriği -->
+    <div id="content">
+        
+        <!-- Açılış Bölümü -->
+        <section id="hero" class="fullscreen flex-center">
+            <div class="hero-box">
+                <h1 class="glow-text">İyi ki Doğdun<br>Hayatımın Anlamı ❤️</h1>
+                <p class="subtitle">Senin için hazırladığım bu kırmızı dünyaya hoş geldin...</p>
+            </div>
+            <div class="scroll-indicator" id="scroll-indicator">
+                <p>Aşağı Kaydır</p>
+                <div class="arrow">⬇</div>
+            </div>
+        </section>
+
+        <!-- Mesaj Bölümü -->
+        <section id="message" class="reveal section-padding">
+            <div class="glass-card modern-card">
+                <h2>Hayatımdaki En Güzel Detay</h2>
+                <p>Hayatıma girdiğin o ilk günden beri dünyam çok daha parlak, çok daha güzel. Seninle geçen her an, kalbime kazınan eşsiz birer anı. Gözlerine baktığımda huzuru, gülüşünde ise yaşam sevincini buluyorum.</p>
+                <p>Birlikte güldüğümüz, omuz omuza verip her zorluğu aştığımız her saniye benim için her şeyden daha kıymetli. Bütün o yapmacıklıktan uzak, en doğal anlarımızda hep "iyi ki" diyorum.</p>
+                <p>İyi ki doğdun, iyi ki benimlesin. Hayatının her yeni yaşında, seni çok ama çok seviyorum.</p>
+            </div>
+        </section>
+
+        <!-- Zaman Çizelgesi (Hikayemiz) Bölümü -->
+        <section id="timeline-section" class="reveal section-padding">
+            <h2 class="section-title">Bizim Hikayemiz</h2>
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>O İlk An</h3>
+                        <p>Gözlerinin içine ilk baktığım, kalbimin ritminin değiştiği o an...</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Birlikte Büyümek</h3>
+                        <p>Zamanla her şeyin güzelleşmesi, birbirimizin en güvenli limanı olmamız.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Bugün</h3>
+                        <p>Yeni bir yaşını daha kutluyoruz ve ben dünyanın en şanslı insanıyım.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OYUN 1: ZAMAN MAKİNESİ VE 7 FOTOĞRAF -->
+        <section id="time-machine-section" class="reveal section-padding">
+            <div id="tm-console" class="glass-card modern-card" style="margin-bottom: 50px;">
+                <h2 style="color: #fca5a5;">Zaman Makinesi ⏳</h2>
+                <p style="margin-bottom: 20px;">En güzel anılarımıza gitmek için zaman makinesini çalıştır!</p>
+                <button id="warp-btn" class="modern-btn">Makineyi Çalıştır 🚀</button>
+            </div>
+            
+            <div id="gallery-container" class="locked-content">
+                <h2 class="section-title">Anılarımız Geldi!</h2>
+                <p style="text-align:center; margin-bottom: 30px; font-weight:300;">Fotoğrafları görmek için üzerlerine "Bas Bana" 😉</p>
+                
+                <div class="gallery-grid">
+                    <!-- Foto 1 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front"><span>Bas Bana ❤️</span></div>
+                            <div class="flip-card-back">
+                                <img src="images/foto1.jpg" alt="Anımız 1">
+                                <div class="photo-overlay">Seninle her an...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Foto 2 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front"><span>Bas Bana ✨</span></div>
+                            <div class="flip-card-back">
+                                <img src="images/foto2.jpg" alt="Anımız 2">
+                                <div class="photo-overlay">Gülüşün...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Foto 3 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front"><span>Bas Bana 🌹</span></div>
+                            <div class="flip-card-back">
+                                <img src="images/foto3.jpg" alt="Anımız 3">
+                                <div class="photo-overlay">Huzurum...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Foto 4 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front"><span>Bas Bana 😍</span></div>
+                            <div class="flip-card-back">
+                                <img src="images/foto4.jpg" alt="Anımız 4">
+                                <div class="photo-overlay">İyi ki varsın!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Foto 5 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front"><span>Bas Bana 💋</span></div>
+                            <div class="flip-card-back">
+                                <img src="images/foto5.jpg" alt="Anımız 5">
+                                <div class="photo-overlay">En güzel gün!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Foto 6 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front"><span>Bas Bana 🎀</span></div>
+                            <div class="flip-card-back">
+                                <img src="images/foto6.jpg" alt="Anımız 6">
+                                <div class="photo-overlay">Sonsuza dek...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Foto 7 -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front"><span>Bas Bana 🎁</span></div>
+                            <div class="flip-card-back">
+                                <img src="images/foto7.jpg" alt="Anımız 7">
+                                <div class="photo-overlay">Hayatımın anlamı!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OYUN 2: Kazı Kazan Bölümü -->
+        <section id="scratch-section" class="reveal section-padding">
+            <h2 class="section-title">Sana Özel Bir Sır</h2>
+            <p style="margin-bottom:20px; font-weight:300;">Aşağıdaki kırmızı alanı parmağınla (veya farenle) kazı!</p>
+            <div class="scratch-container">
+                <div class="scratch-content">
+                    <h3 style="font-family: 'Playfair Display', serif; font-style: italic;">Seni çok ama çok seviyorum! ❤️</h3>
+                    <p>Birlikte nice güzel yaşlara...</p>
+                </div>
+                <canvas id="scratchCanvas"></canvas>
+            </div>
+        </section>
+
+        <!-- Gizli Bölüm: Pasta (Sihirli Kalpler Toplanınca Açılır) -->
+        <section id="make-wish" class="section-padding locked-section">
+            <div class="locked-overlay" id="locked-overlay">
+                <h2>Sürpriz Kilitli 🔒</h2>
+                <p>Ekranın etrafında gezinen 3 sihirli kalbi bul ve dokunarak kilidi aç!</p>
+            </div>
+            
+            <div class="unlocked-content" id="unlocked-content">
+                <h2 class="section-title">Bir Dilek Tut Canım...</h2>
+                <div class="cake-container">
+                    <div class="candle" id="candle">
+                        <div class="flame" id="flame"></div>
+                        <div class="wick"></div>
+                        <div class="wax"></div>
+                    </div>
+                    <div class="css-cake">
+                        <div class="frosting"></div>
+                    </div>
+                </div>
+                <button id="blow-btn" class="modern-btn">Mumları Üfle 🌬️</button>
+                <p id="wish-message" class="hidden-message">Dileğinin gerçekleşmesi için tüm kalbimle her an yanındayım... Seni seviyorum! ❤️✨</p>
+            </div>
+        </section>
+
+        <!-- Kapanış Bölümü -->
+        <section id="finale" class="reveal fullscreen flex-center finale-bg">
+            <div class="finale-content">
+                <h1 class="big-modern">Seninle Yaşlanmak İstiyorum.</h1>
+                <p class="sub-modern">Bugün, yarın ve birlikte yaşayacağımız bütün güzel günlerde. ❤️</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Sihirli Kalp Konteyner (Oyun için) -->
+    <div id="magic-hearts-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

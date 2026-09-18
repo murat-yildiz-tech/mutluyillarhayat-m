@@ -1,0 +1,355 @@
+/* Temel Ayarlar ve Modern Font (KIRMIZI TEMA) */
+:root {
+    --text-color: #ffffff;
+    --accent-color: #ef4444; /* Kırmızı */
+    --accent-glow: rgba(239, 68, 68, 0.6);
+    --bg-gradient-1: #1a0505;
+    --bg-gradient-2: #2a0808;
+    --bg-gradient-3: #110202;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    /* Performanslı kırmızı arka plan */
+    background: radial-gradient(circle at center, var(--bg-gradient-2) 0%, var(--bg-gradient-1) 100%);
+    background-attachment: fixed;
+    color: var(--text-color);
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Başlıklar */
+h1, h2, h3 {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* Tek Canvas */
+#mainCanvas {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 1; pointer-events: none;
+}
+
+#content {
+    position: relative;
+    z-index: 10;
+}
+
+/* Yükleme Ekranı */
+#loader {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: var(--bg-gradient-1);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 99999; transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.heart-pulse { font-size: 5rem; animation: pulse 1s infinite alternate; }
+
+@keyframes pulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 10px var(--accent-color)); }
+    100% { transform: scale(1.2); filter: drop-shadow(0 0 30px var(--accent-color)); }
+}
+
+#loader p {
+    margin-top: 20px; font-weight: 600; font-size: 1.5rem; color: #fca5a5; letter-spacing: 1px;
+}
+
+/* Oyun UI */
+.game-ui {
+    position: fixed; top: -60px; left: 50%; transform: translateX(-50%);
+    background: rgba(40, 5, 5, 0.8); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 30px;
+    padding: 10px 25px; display: flex; align-items: center; gap: 10px;
+    z-index: 9000; font-weight: 400; font-size: 0.9rem; color: #fca5a5;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.game-ui.show { top: 20px; }
+.badge { background: var(--accent-color); color: white; padding: 3px 10px; border-radius: 12px; font-weight: 800; }
+
+/* Sihirli Kalpler */
+.magic-heart {
+    position: fixed; font-size: 2.5rem; z-index: 8000; cursor: pointer;
+    filter: drop-shadow(0 0 15px #ef4444);
+    animation: floatMagic 6s ease-in-out infinite alternate;
+    transition: transform 0.2s;
+    user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.magic-heart:active { transform: scale(0.8); }
+@keyframes floatMagic {
+    0% { transform: translateY(0) rotate(0deg) scale(1); }
+    100% { transform: translateY(-30px) rotate(15deg) scale(1.1); }
+}
+
+/* Müzik Butonu */
+.music-btn {
+    position: fixed; bottom: 30px; right: 30px; 
+    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1);
+    color: white; padding: 12px 25px; border-radius: 50px;
+    cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1rem;
+    backdrop-filter: blur(10px); z-index: 1000; transition: all 0.3s ease;
+    display: flex; align-items: center; gap: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.music-btn:hover { background: rgba(239, 68, 68, 0.3); box-shadow: 0 0 25px var(--accent-glow); transform: translateY(-3px); }
+
+/* Ortak Sınıflar */
+.fullscreen { min-height: 100vh; width: 100%; position: relative; }
+.flex-center { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+.section-padding { padding: 100px 20px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+/* Animasyonlu Ortaya Çıkışlar */
+.reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* Açılış (Hero) */
+.hero-box {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+    backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
+    padding: 50px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.glow-text {
+    font-size: 5rem; color: #fff; line-height: 1.1; margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+}
+.subtitle { font-size: 1.2rem; font-weight: 300; color: #fca5a5; letter-spacing: 1px;}
+
+.scroll-indicator { 
+    position: absolute; bottom: 40px; font-size: 0.9rem; color: #ccc; 
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+    transition: opacity 0.5s ease; 
+}
+.scroll-indicator .arrow { margin-top: 10px; font-size: 2rem; animation: bounce 2s infinite; }
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+/* Modern Cam Kartlar */
+.modern-card {
+    background: linear-gradient(135deg, rgba(40, 8, 8, 0.6), rgba(20, 4, 4, 0.8));
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    backdrop-filter: blur(15px); border-radius: 24px; padding: 50px;
+    max-width: 800px; text-align: center; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    position: relative; overflow: hidden;
+}
+.modern-card::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: skewX(-25deg); animation: shine 6s infinite;
+}
+@keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
+
+.modern-card h2 { font-size: 3rem; color: #fca5a5; margin-bottom: 30px; }
+.modern-card p { font-size: 1.15rem; line-height: 1.8; margin-bottom: 20px; color: #e2e8f0; font-weight: 300; }
+
+/* Hikayemiz (Timeline) */
+.section-title { font-size: 3.5rem; color: #fca5a5; margin-bottom: 50px; text-align: center; font-weight: 800; letter-spacing: -1px;}
+.timeline {
+    border-left: 3px solid var(--accent-color);
+    margin: 0 auto; padding-left: 40px; max-width: 700px; text-align: left;
+}
+.timeline-item { position: relative; margin-bottom: 50px; }
+.timeline-dot {
+    position: absolute; left: -49px; top: 0; width: 16px; height: 16px;
+    background: #fff; border: 4px solid var(--accent-color); border-radius: 50%; box-shadow: 0 0 20px var(--accent-glow);
+}
+.timeline-content {
+    background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s, background 0.3s;
+}
+.timeline-content:hover { transform: translateX(10px); background: rgba(255, 255, 255, 0.06); }
+.timeline-content h3 { color: #fca5a5; font-size: 1.8rem; margin-bottom: 10px; }
+.timeline-content p { color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; font-weight: 300;}
+
+/* Zaman Makinesi & Fotoğraf Kartları */
+.locked-content {
+    opacity: 0; display: none; transform: scale(0.9);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.locked-content.show {
+    opacity: 1; display: block; transform: scale(1);
+}
+
+.gallery-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px; width: 100%; max-width: 1100px; padding: 20px;
+}
+
+/* FLIP CARD SİSTEMİ (Bas Bana) */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    aspect-ratio: 1/1;
+    perspective: 1000px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+.flip-card-front {
+    background: linear-gradient(135deg, #ef4444, #991b1b);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    border: 2px dashed rgba(255,255,255,0.5);
+}
+.flip-card-back {
+    background: #fff;
+    transform: rotateY(180deg);
+}
+.flip-card-back img { width: 100%; height: 100%; object-fit: cover; }
+.photo-overlay {
+    position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px 10px 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: white; font-size: 1.3rem; font-weight: 600; text-align: center;
+}
+
+/* KAZI KAZAN BÖLÜMÜ */
+.scratch-container {
+    position: relative; width: 320px; height: 200px; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5); background: #2a0808; margin: 0 auto;
+    border: 2px solid rgba(239, 68, 68, 0.5);
+}
+.scratch-content {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    background: linear-gradient(135deg, #7f1d1d, #450a0a); text-align: center; padding: 20px;
+}
+.scratch-content h3 { color: #fca5a5; font-size: 1.5rem; margin-bottom: 10px; }
+.scratch-content p { font-size: 1rem; color: #e2e8f0; font-weight: 300;}
+#scratchCanvas {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;
+    cursor: pointer;
+}
+
+/* Kilitli Pasta Bölümü */
+.locked-section { position: relative; width: 100%; min-height: 80vh; display: flex; justify-content: center; align-items: center; }
+.locked-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    background: rgba(20, 5, 5, 0.8); backdrop-filter: blur(10px); z-index: 5;
+    transition: opacity 1s, visibility 1s; text-align: center; padding: 20px;
+}
+.locked-overlay h2 { font-size: 3rem; color: #ef4444; margin-bottom: 15px; }
+.locked-overlay p { font-size: 1.2rem; color: #fff; font-weight: 300; }
+.unlocked-content {
+    opacity: 0; display: none; transform: scale(0.9); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-direction: column; align-items: center; width: 100%;
+}
+.unlocked-content.show { opacity: 1; display: flex; transform: scale(1); }
+
+/* Pasta ve Dilek Tut Bölümü */
+.cake-container { position: relative; margin: 60px 0; display: flex; flex-direction: column; align-items: center; }
+.css-cake {
+    width: 240px; height: 100px; background: #ef4444; border-radius: 15px 15px 5px 5px;
+    position: relative; box-shadow: inset 0 -10px 0 rgba(0,0,0,0.1), 0 10px 30px rgba(0,0,0,0.4);
+    display: flex; justify-content: center;
+}
+.frosting {
+    position: absolute; top: 0; left: 0; width: 100%; height: 35px;
+    background: #fef2f2; border-radius: 15px 15px 15px 15px; box-shadow: 0 5px 0 rgba(0,0,0,0.05);
+}
+.candle {
+    width: 14px; height: 50px;
+    background: repeating-linear-gradient(45deg, #fff, #fff 4px, #ef4444 4px, #ef4444 8px);
+    position: absolute; top: -50px; border-radius: 4px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+.flame {
+    position: absolute; top: -28px; left: 50%; transform: translateX(-50%);
+    width: 18px; height: 28px; background: #fbbf24; border-radius: 50% 50% 20% 20%;
+    box-shadow: 0 0 20px #fbbf24, 0 0 40px #f59e0b, 0 0 60px #ef4444;
+    animation: flicker 0.1s infinite alternate; transition: opacity 0.5s;
+}
+
+.modern-btn {
+    background: var(--accent-color); color: white; border: none; padding: 16px 45px;
+    font-size: 1.1rem; border-radius: 50px; cursor: pointer; font-family: 'Outfit', sans-serif;
+    font-weight: 800; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4); transition: all 0.3s;
+    margin-top: 20px; z-index: 10; position: relative; letter-spacing: 1px;
+}
+.modern-btn:hover { transform: translateY(-3px) scale(1.02); background: #dc2626; box-shadow: 0 15px 35px rgba(239, 68, 68, 0.6); }
+
+.hidden-message { 
+    opacity: 0; transform: translateY(20px); transition: all 1s ease; font-size: 1.5rem; 
+    color: #fef2f2; margin-top: 30px; font-weight: 400; text-align: center; max-width: 600px; 
+    line-height: 1.5; text-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+}
+.hidden-message.show { opacity: 1; transform: translateY(0); }
+
+/* Havai Fişek */
+.explosion-particle {
+    position: fixed; pointer-events: none; border-radius: 50%;
+    animation: explodeAnim 1.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    z-index: 10001;
+}
+@keyframes explodeAnim {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0); opacity: 0; }
+}
+
+/* Kapanış Bölümü */
+.finale-bg { position: relative; }
+.finale-bg::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(239,68,68,0.15) 0%, transparent 70%); z-index: -1;
+}
+.big-modern { font-size: 5vw; color: #fff; text-shadow: 0 0 30px rgba(239,68,68,0.8); margin-bottom: 20px; line-height: 1.1; }
+.sub-modern { font-size: 1.3rem; letter-spacing: 1px; color: #e2e8f0; font-weight: 300;}
+
+/* Tıklama Efekti */
+.click-burst {
+    position: absolute; width: 10px; height: 10px; border-radius: 50%; pointer-events: none;
+    transform: translate(-50%, -50%); animation: burstOut 0.6s ease-out forwards; z-index: 10000;
+}
+@keyframes burstOut {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0); opacity: 0; }
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+    .glow-text { font-size: 3.5rem; }
+    .hero-box { padding: 30px 20px; }
+    .modern-card { padding: 30px 20px; }
+    .modern-card h2 { font-size: 2.2rem; }
+    .section-title { font-size: 2.5rem; }
+    .timeline { padding-left: 20px; }
+    .timeline-dot { left: -29px; }
+    .css-cake { width: 200px; }
+    .big-modern { font-size: 2.8rem; }
+    .sub-modern { font-size: 1rem; padding: 0 20px;}
+    .music-btn { bottom: 20px; right: 20px; padding: 10px 20px; font-size: 0.9rem;}
+}
